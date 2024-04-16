@@ -133,7 +133,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   KEY `FK6malj0b50s3gw8l39146o17k1` (`last_updated_by`),
   CONSTRAINT `FK6malj0b50s3gw8l39146o17k1` FOREIGN KEY (`last_updated_by`) REFERENCES `admin` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +142,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'john@gmail.com','John Dash','2024-04-05','123','0911111111','CLIENT',1),(2,'mary@gmail.com','Mary Geoise','2024-04-05','123','0911111112','SALES',1);
+INSERT INTO `user` VALUES (1,'john@gmail.com','John Dash','2024-04-05','123','0911111111','CLIENT',1),(2,'mary@gmail.com','Mary Geoise','2024-04-05','123','0911111112','SALES',1),(3,'cr7@gmail.com','Cristiano Ronaldo','2024-04-16','123','0911111113','SALES',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,13 +156,13 @@ DROP TABLE IF EXISTS `vehicle`;
 CREATE TABLE `vehicle` (
   `id` int NOT NULL AUTO_INCREMENT,
   `color` varchar(255) DEFAULT NULL,
-  `cylinder` float DEFAULT NULL,
+  `cylinder` bigint DEFAULT NULL,
   `door_numbers` int DEFAULT NULL,
   `last_updated_date` date DEFAULT NULL,
-  `length` float DEFAULT NULL,
+  `length` bigint DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `price` float DEFAULT NULL,
-  `weight` float DEFAULT NULL,
+  `price` bigint DEFAULT NULL,
+  `weight` bigint DEFAULT NULL,
   `last_updated_by` int DEFAULT NULL,
   `vehicle_type_id` int DEFAULT NULL,
   `sales_id` int DEFAULT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES (1,'red',NULL,4,'2024-04-04',NULL,'Car 1',300000000,1000,1,1,NULL),(2,'black',NULL,4,'2024-04-04',30,'Truck 1',1000000000,4000,1,1,NULL),(3,'blue',1,NULL,'2024-04-04',NULL,'Motorcycle 1',12000000,100,1,2,NULL),(4,'green',1,NULL,'2024-04-04',NULL,'Scooter 1',12000000,100,1,2,NULL),(5,'yellow',NULL,4,'2024-04-04',NULL,'Car 2',600000000,1000,1,1,NULL),(6,'Red',0,2,NULL,NULL,'Truck 23',123456,123,NULL,1,2),(7,'Red',0,2,NULL,NULL,'Truck 23',123456,123,NULL,2,2);
+INSERT INTO `vehicle` VALUES (1,'red',NULL,4,'2024-04-04',NULL,'Car 1',30000,1000,1,1,3),(2,'black',NULL,4,'2024-04-04',30,'Truck 1',1000000,4000,1,3,3),(3,'blue',1,NULL,'2024-04-04',NULL,'Motorcycle 1',12000,100,1,2,3),(4,'green',1,NULL,'2024-04-04',NULL,'Scooter 1',12000,100,1,4,3),(5,'yellow',NULL,4,'2024-04-04',NULL,'Car 2',60000,1000,1,1,3),(6,'Red',0,2,NULL,NULL,'Truck 23',12345,123,1,3,2),(7,'Red',0,2,NULL,NULL,'Truck 2345',12345,123,1,3,2);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,7 +201,7 @@ CREATE TABLE `vehicle_type` (
   PRIMARY KEY (`id`),
   KEY `FK9vyik2gtenhy61jcubp9yovu2` (`last_updated_by`),
   CONSTRAINT `FK9vyik2gtenhy61jcubp9yovu2` FOREIGN KEY (`last_updated_by`) REFERENCES `admin` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +210,7 @@ CREATE TABLE `vehicle_type` (
 
 LOCK TABLES `vehicle_type` WRITE;
 /*!40000 ALTER TABLE `vehicle_type` DISABLE KEYS */;
-INSERT INTO `vehicle_type` VALUES (1,'2024-04-04','4 wheels',1),(2,'2024-04-04','2 wheels',1);
+INSERT INTO `vehicle_type` VALUES (1,'2024-04-04','Car',1),(2,'2024-04-04','Motorcycle',1),(3,'2024-04-16','Truck',1),(4,'2024-04-16','Scooter',1);
 /*!40000 ALTER TABLE `vehicle_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-05 13:55:42
+-- Dump completed on 2024-04-16 12:28:48
