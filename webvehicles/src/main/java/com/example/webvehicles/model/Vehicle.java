@@ -20,10 +20,10 @@ public class Vehicle {
     private Integer id;
 
     private String name;
-    private Float price;
-    private Float weight;
-    private Float cylinder;
-    private Float length;
+    private Long price;
+    private Long weight;
+    private Long cylinder;
+    private Long length;
     private String color;
     private Integer doorNumbers;
 

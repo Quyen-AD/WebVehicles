@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/admin/vehicle")
+@RequestMapping()
 public class AdminVehicleController {
     private final VehicleTypeRepository vehicleTypeRepository;
     private final VehicleRepository vehicleRepository;
@@ -27,7 +27,7 @@ public class AdminVehicleController {
     @GetMapping("/admin/vehicle")
     public String vehicles(Model model) {
         model.addAttribute("vehicles", vehicleRepository.findAll());
-        return "admin/list-vehicle";
+        return "admin/vehicle/list-vehicle";
     }
 
     @GetMapping("/admin/vehicle/form-create-vehicle")
@@ -36,7 +36,7 @@ public class AdminVehicleController {
         model.addAttribute("vehicle",vehicleDto);
         model.addAttribute("users", userRepository.findAllByRole("SALES"));
         model.addAttribute("types", vehicleTypeRepository.findAll());
-        return "admin/vehicle-create";
+        return "admin/vehicle/vehicle-create";
     }
 
     @PostMapping("/admin/vehicle/save")
@@ -71,10 +71,16 @@ public class AdminVehicleController {
         vehicleDto.setDoorNumbers(vehicle.getDoorNumbers());
         vehicleDto.setVehicleTypeId(vehicle.getVehicleType().getId());
         vehicleDto.setVehicleTypeName(vehicle.getVehicleType().getName());
-        vehicleDto.setUserId(vehicle.getSales().getId());
-        vehicleDto.setFullName(vehicle.getSales().getFullName());
+        if(vehicle.getSales() == null) {
+            vehicleDto.setUserId(0);
+            vehicleDto.setFullName("");
+        }
+        else {
+            vehicleDto.setUserId(vehicle.getSales().getId());
+            vehicleDto.setFullName(vehicle.getSales().getFullName());
+        }
         model.addAttribute("vehicle",vehicleDto);
-        return "admin/vehicle-update";
+        return "admin/vehicle/vehicle-update";
     }
 
     @PostMapping("/admin/vehicle/update")

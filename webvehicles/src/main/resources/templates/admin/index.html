@@ -1,15 +1,93 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		.container-fluid {
+			padding: 20px;
+			background-color: #f8f9fa;
+		}
+
+		.custom-border {
+			border: 1px solid #dee2e6;
+			border-radius: 5px;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
 <body>
-	<main class="container-fluid">
-		<a th:href="@{/templates/admin/vehicle}">Vehicle</a>
-		<a th:href="@{/templates/admin/reservation}">Reservation</a>
-		<a th:href="@{/templates/admin/comment}">Comment</a>
-	</main>
+<main class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Agences:</b> <span th:text="${sales}"></span></h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Voitures:</b> <span th:text="${cars}"></span></h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Camions:</b> <span th:text="${trucks}"></span></h3>
+			</section>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Motos:</b> <span th:text="${motorcycles}"></span></h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Clients:</b> <span th:text="${clients}"></span></h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Reservations:</b> <span th:text="${reservations}"></span></h3>
+			</section>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Quatre roues:</b> <span th:text="${total2Wheels}"></span> €</h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Deux roues:</b> <span th:text="${total4Wheels}"></span> €</h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Total:</b> <span th:text="${sum}"></span> €</h3>
+			</section>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<section class="text-center">
+				<a href="/admin/vehicle" class="btn btn-primary">Vehicle</a>
+			</section>
+		</div>
+	</div>
+</main>
 </body>
 </html>
-
-
-
-
-

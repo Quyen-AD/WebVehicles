@@ -25,6 +25,12 @@
                     th:utext="${type.name}"/>
         </select>
 
+        <select class="form-select form-control mb-4 col-4" th:field="*{userId}"
+                aria-label="Default select example">
+            <option th:each="user : ${users}" th:value="${user.id}"
+                    th:utext="${user.fullName}"/>
+        </select>
+
         <button type="submit" class="btn btn-info col-2">Save Vehicle</button>
     </form>
     <hr>
