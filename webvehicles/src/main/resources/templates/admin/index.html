@@ -82,6 +82,35 @@
 	</div>
 
 	<div class="row">
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Voiture:</b> <span th:text="${carPercent}"></span> %</h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Camion:</b> <span th:text="${truckPercent}"></span> %</h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Deux roues:</b> <span th:text="${twoWheelPercent}"></span> %</h3>
+			</section>
+		</div>
+	</div>
+
+	<div class="row" th:each="sale : ${sales}">
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b th:text="${sale.name}"></b> <span th:text="${sale.percent}"></span> %</h3>
+			</section>
+		</div>
+	</div>
+
+
+	<div class="row">
 		<div class="col-md-12">
 			<section class="text-center">
 				<a href="/admin/vehicle" class="btn btn-primary">Vehicle</a>

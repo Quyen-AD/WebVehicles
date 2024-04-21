@@ -1,6 +1,9 @@
 package com.example.webvehicles.controller;
 
+import java.text.DecimalFormat;
 import com.example.webvehicles.model.Admin;
+import com.example.webvehicles.model.SalesDto;
+import com.example.webvehicles.model.User;
 import com.example.webvehicles.repository.AdminRepository;
 import com.example.webvehicles.repository.ReservationRepository;
 import com.example.webvehicles.repository.UserRepository;
@@ -11,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -55,9 +61,39 @@ public class AdminController {
         model.addAttribute("motorcycles", vehicleRepository.findAllByVehicleType_Id(2).size());
         model.addAttribute("clients", userRepository.findAllByRole("CLIENTS").size());
         model.addAttribute("reservations", reservationRepository.count());
-        model.addAttribute("total2Wheels", vehicleRepository.getTotalValueOfTwoWheeledVehicles());
-        model.addAttribute("total4Wheels", vehicleRepository.getTotalValueOfTwoWheeledVehicles());
-        model.addAttribute("sum", vehicleRepository.getTotalValueOfTwoWheeledVehicles() + vehicleRepository.getTotalValueOfFourWheeledVehicles());
+        model.addAttribute("total2Wheels", reservationRepository.getTotalValueOfTwoWheeledVehicles());
+        model.addAttribute("total4Wheels", reservationRepository.getTotalValueOfFourWheeledVehicles());
+        model.addAttribute("sum", reservationRepository.getTotalValueOfTwoWheeledVehicles() + reservationRepository.getTotalValueOfFourWheeledVehicles());
+
+        Integer car = vehicleRepository.countAllByVehicleType_Id(1);
+        Integer truck = vehicleRepository.countAllByVehicleType_Id(3);
+        Integer twoWheels = vehicleRepository.countAllByVehicleType_Id(2) + vehicleRepository.countAllByVehicleType_Id(4);
+        Integer sum = car + truck + twoWheels;
+
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        double carPercent = Double.parseDouble(df.format((double) car / sum * 100));
+        double truckPercent = Double.parseDouble(df.format((double) truck / sum * 100));
+        double twoWheelPercent = Double.parseDouble(df.format((double) twoWheels / sum * 100));
+
+        model.addAttribute("carPercent", carPercent);
+        model.addAttribute("truckPercent", truckPercent);
+        model.addAttribute("twoWheelPercent", twoWheelPercent);
+
+        Long count = vehicleRepository.count();
+        List<SalesDto> salesDtos = new ArrayList<>();
+        List<User> users = userRepository.findAllByRole("SALES");
+        for(User user : users) {
+            Integer countVehicle = vehicleRepository.countVehiclesBySalesId(user.getId());
+            double percent = Double.parseDouble(df.format((double) countVehicle / count * 100));
+            SalesDto salesDto = new SalesDto();
+            salesDto.setId(user.getId());
+            salesDto.setName(user.getFullName());
+            salesDto.setPercent(percent);
+            salesDtos.add(salesDto);
+        }
+
+        model.addAttribute("sales", salesDtos);
         return "admin/index";
     }
 
