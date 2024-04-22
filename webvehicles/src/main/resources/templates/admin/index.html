@@ -101,10 +101,10 @@
 		</div>
 	</div>
 
-	<div class="row" th:each="sale : ${sales}">
+	<div class="row" th:each="agency : ${agencies}">
 		<div class="col-md-4">
 			<section class="custom-border">
-				<h3><b th:text="${sale.name}"></b> <span th:text="${sale.percent}"></span> %</h3>
+				<h3><b th:text="${agency.name}"></b> <span th:text="${agency.percent}"></span> %</h3>
 			</section>
 		</div>
 	</div>

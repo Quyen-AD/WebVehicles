@@ -15,13 +15,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
 
     Integer countAllByVehicleType_Id(Integer id);
 
-    @Query("SELECT SUM(v.price) FROM Vehicle v WHERE v.vehicleType.id IN (2, 4)")
-    Long getTotalValueOfTwoWheeledVehicles();
-
-    @Query("SELECT SUM(v.price) FROM Vehicle v WHERE v.vehicleType.id IN (1, 3)")
-    Long getTotalValueOfFourWheeledVehicles();
-
-    @Query("SELECT COUNT(v) FROM Vehicle v WHERE v.sales.id = :userId")
-    Integer countVehiclesBySalesId(@Param("userId") Integer userId);
+    @Query("SELECT COUNT(v) FROM Vehicle v WHERE v.agency.id = :agencyId")
+    Integer countVehiclesByAgencyId(@Param("agencyId") Integer agencyId);
 
 }

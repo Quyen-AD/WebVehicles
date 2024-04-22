@@ -46,6 +46,30 @@ INSERT INTO `admin` VALUES (1,'superadmin@gmail.com','Super Admin','2024-04-04',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `agency`
+--
+
+DROP TABLE IF EXISTS `agency`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `agency` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `agency`
+--
+
+LOCK TABLES `agency` WRITE;
+/*!40000 ALTER TABLE `agency` DISABLE KEYS */;
+INSERT INTO `agency` VALUES (1,'Nantes'),(2,'Paris'),(3,'Lyon');
+/*!40000 ALTER TABLE `agency` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `comment`
 --
 
@@ -166,12 +190,15 @@ CREATE TABLE `vehicle` (
   `last_updated_by` int DEFAULT NULL,
   `vehicle_type_id` int DEFAULT NULL,
   `sales_id` int DEFAULT NULL,
+  `agency_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK399a2k8ag94wl1xgrdujs869m` (`last_updated_by`),
   KEY `FKddtxlc05rojc56bprvek17hnk` (`vehicle_type_id`),
   KEY `FKn8ieqxvxqmgp8u1h9qtscdvs6` (`sales_id`),
+  KEY `FKlk2hacgropq4q1d37m14g5gdj` (`agency_id`),
   CONSTRAINT `FK399a2k8ag94wl1xgrdujs869m` FOREIGN KEY (`last_updated_by`) REFERENCES `admin` (`id`),
   CONSTRAINT `FKddtxlc05rojc56bprvek17hnk` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`),
+  CONSTRAINT `FKlk2hacgropq4q1d37m14g5gdj` FOREIGN KEY (`agency_id`) REFERENCES `agency` (`id`),
   CONSTRAINT `FKn8ieqxvxqmgp8u1h9qtscdvs6` FOREIGN KEY (`sales_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -182,7 +209,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES (1,'red',NULL,4,'2024-04-04',NULL,'Car 1',30000,1000,1,1,3),(2,'black',NULL,4,'2024-04-04',30,'Truck 1',1000000,4000,1,3,3),(3,'blue',1,NULL,'2024-04-04',NULL,'Motorcycle 1',12000,100,1,2,3),(4,'green',1,NULL,'2024-04-04',NULL,'Scooter 1',12000,100,1,4,3),(5,'yellow',NULL,4,'2024-04-04',NULL,'Car 2',60000,1000,1,1,3),(6,'Red',0,2,NULL,NULL,'Truck 23',12345,123,1,3,2),(7,'Red',0,2,NULL,NULL,'Truck 2345',12345,123,1,3,2);
+INSERT INTO `vehicle` VALUES (1,'red',NULL,4,'2024-04-04',NULL,'Car 1',30000,1000,1,1,3,1),(2,'black',NULL,4,'2024-04-04',30,'Truck 1',1000000,4000,1,3,3,1),(3,'blue',1,NULL,'2024-04-04',NULL,'Motorcycle 1',12000,100,1,2,3,2),(4,'green',1,NULL,'2024-04-04',NULL,'Scooter 1',12000,100,1,4,3,2),(5,'yellow',NULL,4,'2024-04-04',NULL,'Car 2',60000,1000,1,1,3,2),(6,'Red',0,2,NULL,NULL,'Truck 23',12345,123,1,3,2,3),(7,'Red',0,2,NULL,NULL,'Truck 2345',12345,123,1,3,2,3);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,4 +258,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-16 12:28:48
+-- Dump completed on 2024-04-22 10:58:37
